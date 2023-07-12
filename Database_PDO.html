@@ -1,0 +1,767 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Database PDO</title>
+        <link rel="stylesheet" type="text/css" href="components/css/bulma.css"/>
+        <link rel="stylesheet" type="text/css" href="components/css/styles.css"/>  
+        <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
+        <link rel="icon" type="image/png" sizes="196x196" href="https://www.php.net/favicon-196x196.png?v=2">
+    </head>
+
+    <body>
+        
+        <section id="navbar">
+
+            <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item">
+                        <img src="components/imges/php.png">
+                    </a>
+
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-start">
+
+                        <a class="navbar-item" href="index.html">
+                            Home
+                        </a>
+
+                        <a class="navbar-item" href="Basics.html">
+                            Basics
+                        </a>
+
+                        <a class="navbar-item" href="Database_PDO.html">
+                            Database_PDO
+                        </a>
+
+                        <a class="navbar-item" href="simple_Website_template.html">
+                            Simple Website Template
+                        </a>
+
+                    </div>
+
+                    <div class="navbar-end">
+                    
+                    </div>
+                </div>
+            </nav>
+
+            <br>
+            <br>
+
+        </section>
+
+        <section id="database_pdo">
+
+            <div class="columns">
+
+                <div class="column box is-10 is-offset-1">
+
+                    <div class="content is-medium">
+                        <h1>Database PDO</h1>
+                        <p>Here i show you how to connect to a DB and how to execute selects, updates, ... 
+                        <br>Let's start.</p>
+                    </div>
+    
+                    <div class="content is-normal">
+
+                        <div id="database_pdo-db-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('database_pdo-db')">
+                                <h3 class="card-header-title">
+                                    This is the DB i use
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="database_pdo-db" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>ERM</p>
+                            
+                                    <img src="db/CarDB_ERM.png" alt="CarDB_ERM.png"> <br>
+                                    
+                                    <p>Dummy Data</p>
+
+                                    Car: <br>
+                                    <img src="db/car_dummy.png" alt="car_dummy.png"> <br> <br>
+                                    Car_Owner: <br>
+                                    <img src="db/car_owner_dummy.png" alt="car_owner_dummy.png"> <br> <br>
+                                    Owner: <br>
+                                    <img src="db/owner_dummy.png" alt="owner_dummy.png"> <br> <br>
+                                    Brand: <br>
+                                    <img src="db/brand_dummy.png" alt="brand_dummy.png"> <br> <br>
+                                    Color: <br>
+                                    <img src="db/color_dummy.png" alt="color_dummy.png"> <br> <br>
+                                    Type: <br>
+                                    <img src="db/type_dummy.png" alt="type_dummy.png"> <br> <br>
+
+                                    <p>SQL</p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre class="sql" id="database_pdo-db-1-code-snipped">
+/* Schema CarDB */
+DROP SCHEMA CarDB;
+CREATE SCHEMA IF NOT EXISTS CarDB DEFAULT CHARACTER SET utf8 ;
+USE CarDB ;
+
+/* Table CarDB.Color */
+CREATE TABLE IF NOT EXISTS CarDB.Color (
+Color_ID INT NOT NULL AUTO_INCREMENT,
+Color_Name VARCHAR(100) NOT NULL,
+PRIMARY KEY (Color_ID)
+);
+
+/* Table CarDB.Brand */
+CREATE TABLE IF NOT EXISTS CarDB.Brand (
+Brand_ID INT NOT NULL AUTO_INCREMENT,
+Brand_Name VARCHAR(100) NOT NULL,
+PRIMARY KEY (Brand_ID)
+);
+
+/* Table CarDB.Type */
+CREATE TABLE IF NOT EXISTS CarDB.Type (
+Type_ID INT NOT NULL AUTO_INCREMENT,
+Type_Name VARCHAR(100) NOT NULL,
+PRIMARY KEY (Type_ID)
+);
+
+/* Table CarDB.Car */
+CREATE TABLE IF NOT EXISTS CarDB.Car (
+Car_ID INT NOT NULL AUTO_INCREMENT,
+Car_Mileage INT NOT NULL,
+Car_Horsepower INT NOT NULL,
+Color_ID INT NOT NULL,
+Brand_ID INT NOT NULL,
+Type_ID INT NOT NULL,
+PRIMARY KEY (Car_ID),
+INDEX fk_Car_Color_idx (Color_ID ASC),
+INDEX fk_Car_Brand1_idx (Brand_ID ASC),
+INDEX fk_Car_Type1_idx (Type_ID ASC),
+CONSTRAINT fk_Car_Color
+FOREIGN KEY (Color_ID)
+REFERENCES CarDB.Color (Color_ID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION,
+CONSTRAINT fk_Car_Brand1
+FOREIGN KEY (Brand_ID)
+REFERENCES CarDB.Brand (Brand_ID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION,
+CONSTRAINT fk_Car_Type1
+FOREIGN KEY (Type_ID)
+REFERENCES CarDB.Type (Type_ID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+);
+
+/* Table CarDB.Owner */
+CREATE TABLE IF NOT EXISTS CarDB.Owner (
+Owner_ID INT NOT NULL AUTO_INCREMENT,
+Owner_FirstName VARCHAR(100) NOT NULL,
+Owner_LastName VARCHAR(100) NOT NULL,
+PRIMARY KEY (Owner_ID)
+);
+
+/* Table CarDB.Car_Owner */
+CREATE TABLE IF NOT EXISTS CarDB.Car_Owner (
+Car_Owner_ID INT NOT NULL AUTO_INCREMENT,
+Car_ID INT NOT NULL,
+Owner_ID INT NOT NULL,
+PRIMARY KEY (Car_Owner_ID),
+INDEX fk_Car_Owner_Owner1_idx (Owner_ID ASC),
+INDEX fk_Car_Owner_Car1_idx (Car_ID ASC),
+CONSTRAINT fk_Car_Owner_Car1
+FOREIGN KEY (Car_ID)
+REFERENCES CarDB.Car (Car_ID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION,
+CONSTRAINT fk_Car_Owner_Owner1
+FOREIGN KEY (Owner_ID)
+REFERENCES CarDB.Owner (Owner_ID)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+);
+
+/* Data for table CarDB.Color */
+INSERT INTO CarDB.Color (Color_ID, Color_Name) 
+VALUES (1, 'White');
+INSERT INTO CarDB.Color (Color_ID, Color_Name) 
+VALUES (2, 'Black');
+INSERT INTO CarDB.Color (Color_ID, Color_Name) 
+VALUES (3, 'Silver');
+
+/* Data for table CarDB.Brand */
+INSERT INTO CarDB.Brand (Brand_ID, Brand_Name) 
+VALUES (1, 'Audi');
+INSERT INTO CarDB.Brand (Brand_ID, Brand_Name) 
+VALUES (2, 'VW');
+INSERT INTO CarDB.Brand (Brand_ID, Brand_Name) 
+VALUES (3, 'Honda');
+
+/* Data for table CarDB.Type */
+INSERT INTO CarDB.Type (Type_ID, Type_Name) 
+VALUES (1, 'Sportcar');
+INSERT INTO CarDB.Type (Type_ID, Type_Name) 
+VALUES (2, 'SUV');
+INSERT INTO CarDB.Type (Type_ID, Type_Name) 
+VALUES (3, 'Coupe');
+
+/* Data for table CarDB.Car */
+INSERT INTO CarDB.Car (Car_ID, Car_Mileage, Car_Horsepower, 
+Color_ID, Brand_ID, Type_ID) 
+VALUES (1, 180000, 133, 3, 3, 1);
+INSERT INTO CarDB.Car (Car_ID, Car_Mileage, Car_Horsepower, 
+Color_ID, Brand_ID, Type_ID) 
+VALUES (2, 1000, 450, 3, 1, 2);
+INSERT INTO CarDB.Car (Car_ID, Car_Mileage, Car_Horsepower, 
+Color_ID, Brand_ID, Type_ID) 
+VALUES (3, 240000, 65, 1, 2, 3);
+
+/* Data for table CarDB.Owner */
+INSERT INTO CarDB.Owner (Owner_ID, Owner_FirstName, Owner_LastName) 
+VALUES (1, 'Hans', 'Müller');
+INSERT INTO CarDB.Owner (Owner_ID, Owner_FirstName, Owner_LastName) 
+VALUES (2, 'Anna', 'Musterfrau');
+INSERT INTO CarDB.Owner (Owner_ID, Owner_FirstName, Owner_LastName) 
+VALUES (3, 'Laura', 'Lacher');
+
+/* Data for table CarDB.Car_Owner */
+INSERT INTO CarDB.Car_Owner (Car_Owner_ID, Car_ID, Owner_ID) 
+VALUES (1, 1, 3);
+INSERT INTO CarDB.Car_Owner (Car_Owner_ID, Car_ID, Owner_ID) 
+VALUES (2, 2, 1);
+INSERT INTO CarDB.Car_Owner (Car_Owner_ID, Car_ID, Owner_ID) 
+VALUES (3, 3, 2);
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-db-1-copy-button" onclick="copy('database_pdo-db-1-code-snipped', 'database_pdo-db-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        
+                        <div id="database_pdo-connection-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('database_pdo-connection')">
+                                <h3 class="card-header-title">
+                                    Connection
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="database_pdo-connection" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>Use this to connect your DB with your Website</p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-connection-1-code-snipped">
+$server = "localhost";
+$user = "root";
+$pw = "raspberry";
+$db = "rezept";
+
+try {
+
+    $con = new PDO(
+        "mysql:host=" . $server . ";" . 
+        "dbname=" . $db . ";" . 
+        "charset=utf8", $user, $pw);
+
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+} catch(Exception $e) {
+
+    echo "Error - Connect to DB: " . $e->getCode() . ":" . $e->getMessage();
+
+}    
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-connection-1-copy-button" onclick="copy('database_pdo-connection-1-code-snipped', 'database_pdo-connection-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <p>If you do not get an error, everything has worked fine</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="database_pdo-select-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('database_pdo-select')">
+                                <h3 class="card-header-title">
+                                    Select
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="database_pdo-select" class="card-content" style="display: none;">
+                                <div class="content">
+
+                                    <h1>Function for executing the selects</h1>
+
+                                    <p>
+                                        Let's execute our first select. <br>
+                                        Normally i enter selects into a function and get the result returned in an array. <br>
+                                        Also, I outsource the execution of the select itself into a separate function. <br>
+                                        In this function I also bind the parameters to the select for the case that I provide some.
+                                    </p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-select-1-code-snipped">
+function createStatement($query, $arrayValues = NULL) {
+    global $con; 
+    $stmt = $con->prepare($query);
+    $stmt->execute($arrayValues);
+    return $stmt;
+}
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-select-1-copy-button" onclick="copy('database_pdo-select-1-code-snipped', 'database_pdo-select-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        If $arrayValues is empty no parameters are passed and the select will be executed. 
+                                    </p>
+
+                                    <h1>Function for the select</h1>
+
+                                    <p>
+                                        And here is the function for the select itself (without parameters).
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-select-2-code-snipped">
+function select_all_brands() {
+    $select_all_brands = "
+        SELECT * FROM cardb.brand
+    ;";
+
+    $select_all_brands = createStatement($select_all_brands);
+
+    return $select_all_brands->fetchAll(PDO::FETCH_ASSOC);
+}
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-select-2-copy-button" onclick="copy('database_pdo-select-2-code-snipped', 'database_pdo-select-2-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        And this is how you call/output it
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-select-3-code-snipped">
+$rows = select_all_brands();
+
+print_r($rows);
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-select-3-copy-button" onclick="copy('database_pdo-select-3-code-snipped', 'database_pdo-select-3-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        And this is how the result looks like:
+                                    </p>
+
+                                    <img src="components/imges/Select-Result-Example.png" alt="Select-Result-Example.png">
+
+                                    <p>
+                                        As you can see the result is safed in a two-dimensional array. Array 1 contains the rows of the table and array 2 contains the columns. <br>
+                                        So if you want to output one specific data record, do it like that: 
+                                    </p>
+                                    
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-select-4-code-snipped">
+echo $rows[2]["Brand_Name"];
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-select-4-copy-button" onclick="copy('database_pdo-select-4-code-snipped', 'database_pdo-select-4-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <h1>WHERE</h1>
+
+                                    <p>
+                                        If you want to make a select with a WHERE clause you need to overgive a parameter. <br>
+                                        We also need to change our select function slightly: 
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-select-5-code-snipped">
+function select_brands_where($brand_name) {
+    $select_brands_where = "
+        SELECT * FROM cardb.brand
+        WHERE Brand_Name = ?
+    ;";
+
+    $values = array($brand_name);
+    $select_brands_where = createStatement($select_brands_where, $values);
+
+    return $select_brands_where->fetchAll(PDO::FETCH_ASSOC);
+} 
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-select-5-copy-button" onclick="copy('database_pdo-select-5-code-snipped', 'database_pdo-select-5-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        You now just need to add the parameter as spesified in the function:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-select-6-code-snipped">
+$rows = select_brands_where("Honda");
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-select-6-copy-button" onclick="copy('database_pdo-select-6-code-snipped', 'database_pdo-select-6-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        We only have one row with the brand name "Honda", therefore we just have one result:
+                                    </p>
+                                    
+                                    <img src="components/imges/Where-Select-Result-Example.png" alt="Where-Select-Result-Example.png">
+                                    
+                                    <h1>LIKE</h1>
+
+                                    <p>
+                                        And if you want to use a LIKE clause like this:
+                                    </p>
+
+                                    <img src="components/imges/Where-Like-Select.png" alt="Where-Like-Select.png">
+
+                                    <p>
+                                        You need to change the = to a LIKE in the select and add the code for the LIKE to the string itself:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-select-7-code-snipped">
+function select_brands_where_like($search_for) {
+    $select_brands_where_like = "
+        SELECT * FROM cardb.owner
+        WHERE Owner_LastName LIKE ?
+    ;";
+
+    $values = array($search_for);
+    $select_brands_where_like = createStatement($select_brands_where_like, $values);
+
+    return $select_brands_where_like->fetchAll(PDO::FETCH_ASSOC);
+}  
+
+$rows_where_like = select_brands_where_like("M%");
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-select-7-copy-button" onclick="copy('database_pdo-select-7-code-snipped', 'database_pdo-select-7-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <h1>More then one parameter</h1>
+
+                                    <p>
+                                        You also will need selects with more parameters. This is how you do it:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-select-8-code-snipped">
+function select_car_by_color_and_hp($color, $min_horsepower) {
+    $select_car_by_color_and_hp = "
+        SELECT * FROM cardb.car c
+        LEFT JOIN cardb.color co ON c.Color_ID = co.Color_ID
+        WHERE co.Color_Name = ?
+        AND c.Car_Horsepower > ?
+    ;";
+
+    $values = array($color, $min_horsepower);
+    $select_car_by_color_and_hp = createStatement($select_car_by_color_and_hp, $values);
+
+    return $select_car_by_color_and_hp->fetchAll(PDO::FETCH_ASSOC);
+}  
+
+$rows_color_hp = select_car_by_color_and_hp("Silver", 400);
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-select-8-copy-button" onclick="copy('database_pdo-select-8-code-snipped', 'database_pdo-select-8-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        You can overgive as many parameter as you want. Just keep the order in mind. <br>
+                                        The first question mark in the select, receives the first value in your $values array.
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="database_pdo-insert-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('database_pdo-insert')">
+                                <h3 class="card-header-title">
+                                    Insert
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="database_pdo-insert" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>
+                                        Here is the code to insert a row, in my case i use the table brand:
+                                    </p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-insert-1-code-snipped">
+function insert_brand($new_brand_name) {
+    $existing_brands = select_all_brands();
+
+    foreach ($existing_brands as $brand) {
+        if ($brand["Brand_Name"] == $new_brand_name) {
+            return 'Brand is already existing!';
+        }
+    }
+
+    $insert_brand = "
+        INSERT INTO cardb.brand (Brand_Name) 
+        VALUES (?)
+    ;";
+
+    $values = array($new_brand_name);
+
+    if (createStatement($insert_brand, $values)) {
+        return 'Brand inserted!';
+    }
+
+    return 'Something went wrong while inserting new brand!';
+}
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-insert-1-copy-button" onclick="copy('database_pdo-insert-1-code-snipped', 'database_pdo-insert-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        Let me explain what is happaning here: <br> <br>
+                                        First of all, I select all brands and go through the results. <br>
+                                        I check whether the entered name already exists. <br>
+                                        If yes, I stop the function and return an error. <br>
+                                        Afterwards (only if no error is returned and therefore the name is not yet present) I make an insert. <br>
+                                        This is basically the same as a select but with an insert statement. <br>
+                                        After that i check if the insert worked if yes i return a message. <br>
+                                        Otherwise i return an error.
+
+                                    </p>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="database_pdo-update-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('database_pdo-update')">
+                                <h3 class="card-header-title">
+                                    Update
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="database_pdo-update" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>
+                                        
+                                    </p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-update-1-code-snipped">
+   
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-update-1-copy-button" onclick="copy('database_pdo-update-1-code-snipped', 'database_pdo-update-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="database_pdo-delete-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('database_pdo-delete')">
+                                <h3 class="card-header-title">
+                                    Delete
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="database_pdo-delete" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>
+                                        
+                                    </p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-delete-1-code-snipped">
+   
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-delete-1-copy-button" onclick="copy('database_pdo-delete-1-code-snipped', 'database_pdo-delete-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="database_pdo-useful-functions-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('database_pdo-useful-functions')">
+                                <h3 class="card-header-title">
+                                    Useful Functions
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="database_pdo-useful-functions" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>
+                                        Here are some very useful functions for your next Website, maybe you need them?
+                                    </p>
+
+                                    <h1>Print a Table</h1>
+
+                                    <p>
+                                        Just overgive this function the result array of any select and it will print it out as a table.
+                                    </p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-useful-functions-1-code-snipped">
+function printTable($select_result) {
+    echo '&lt;table&gt;';
+    echo '&lt;thead&gt;&lt;tr&gt;';
+    
+    // Table headers
+    foreach ($select_result[0] as $key => $value) {
+        echo '&lt;th&gt;' . $key . '&lt;/th&gt;';
+    }
+    
+    echo '&lt;/tr&gt;&lt;/thead&gt;';
+    echo '&lt;tbody&gt;';
+    
+    // Table rows
+    foreach ($select_result as $row) {
+        echo '&lt;tr&gt;';
+        
+        foreach ($row as $value) {
+            echo '&lt;td&gt;' . $value . '&lt;/td&gt;';
+        }
+        
+        echo '&lt;/tr&gt;';
+    }
+    
+    echo '&lt;/tbody&gt;';
+    echo '&lt;/table&gt;';
+}
+
+$all_brands = Select_all_brands();
+
+printTable($all_brands);
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-useful-functions-1-copy-button" onclick="copy('database_pdo-useful-functions-1-code-snipped', 'database_pdo-useful-functions-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                    </div>
+
+                </div>
+    
+            </div>    
+
+        </section>
+
+        <br>        
+
+    </body>
+
+    <script src="components/js/main.js"></script>
+
+</html>

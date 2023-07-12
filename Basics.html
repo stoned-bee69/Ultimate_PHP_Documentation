@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Basic</title>
+        <link rel="stylesheet" type="text/css" href="components/css/bulma.css"/>
+        <link rel="stylesheet" type="text/css" href="components/css/styles.css"/>  
+        <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
+        <link rel="icon" type="image/png" sizes="196x196" href="https://www.php.net/favicon-196x196.png?v=2">
+    </head>
+
+    <body>
+    
+        <section id="navbar">
+
+            <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item">
+                        <img src="components/imges/php.png">
+                    </a>
+
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-start">
+
+                        <a class="navbar-item" href="index.html">
+                            Home
+                        </a>
+
+                        <a class="navbar-item" href="Basics.html">
+                            Basics
+                        </a>
+
+                        <a class="navbar-item" href="Database_PDO.html">
+                            Database_PDO
+                        </a>
+
+                        <a class="navbar-item" href="simple_Website_template.html">
+                            Simple Website Template
+                        </a>
+
+                    </div>
+
+                    <div class="navbar-end">
+                    
+                    </div>
+                </div>
+            </nav>
+
+            <br>
+            <br>
+
+        </section>
+
+        <section id="basics">
+
+            <div class="columns">
+
+                <div class="column box is-10 is-offset-1">
+
+                    <div class="content is-medium">
+                        <h1>Basics</h1>
+                        <p>Welcome to the basics, let's start.</p>
+                    </div>
+    
+                    <div class="content is-normal">
+                        
+                        <div id="basics-variables-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('basics-variables')">
+                                <h3 class="card-header-title">
+                                    Variables
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="basics-variables" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>This is a Variable</p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-variables-1-code-snipped">
+$a = 1;
+$b = "Apple";
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-variables-1-copy-button" onclick="copy('basics-variables-1-code-snipped', 'basics-variables-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <p>
+                                        You do not have to specify a data type. <br>
+                                        You can output them like this:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-variables-2-code-snipped">
+echo $a;
+echo $b
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-variables-2-copy-button" onclick="copy('basics-variables-2-code-snipped', 'basics-variables-2-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        You can also connect them with each other by using a dot:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-variables-3-code-snipped">
+$a = 2;
+$b = "Lemon";
+
+$c = $a . $b;
+
+echo $c
+// OR
+echo $a . $b; 
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-variables-3-copy-button" onclick="copy('basics-variables-3-code-snipped', 'basics-variables-3-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="basics-array-card" class="card">
+                            <header class="card-header"  onclick="hide_show_something('basics-arrays')">
+                                <h3 class="card-header-title">
+                                    Arrays
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="basics-arrays" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>This is a Array</p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-arrays-1-code-snipped">
+$cars = array("Volvo", "BMW", "Toyota");
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-arrays-1-copy-button" onclick="copy('basics-arrays-1-code-snipped', 'basics-arrays-1-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <p>
+                                        You can output them like this:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-arrays-2-code-snipped">
+print_r($cars);
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-arrays-2-copy-button" onclick="copy('basics-arrays-2-code-snipped', 'basics-arrays-2-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        You can also store arrays inside of arrays (two-dimensional array):
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-arrays-3-code-snipped">
+$cars_audi = array("A4", "A5", "A7");
+$cars_bmw = array("M5", "M8", "X5");
+$cars_vw = array("Golf", "Polo", "tiguan");
+
+$brands = array($cars_audi, $cars_bmw, $cars_vw);
+
+print_r($brands);
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-arrays-3-copy-button" onclick="copy('basics-arrays-3-code-snipped', 'basics-arrays-3-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        And if you want to give the values a name inside of the array. This is how to do it:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-arrays-4-code-snipped">
+$row = array("ID" => "1", "FirstName" => "John", "LastName" => "Wick");
+
+print_r($row);
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-arrays-4-copy-button" onclick="copy('basics-arrays-4-code-snipped', 'basics-arrays-4-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        And this is how you address specific locations of an array:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-arrays-5-code-snipped">
+//single array
+echo $cars[2];
+
+//two-dimensional array
+echo $brands[2][1];
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-arrays-5-copy-button" onclick="copy('basics-arrays-5-code-snipped', 'basics-arrays-5-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        Quick tipp: If you want to display the result pretty use this:
+                                    </p>
+
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="basics-arrays-6-code-snipped">
+echo "&lt;pre&gt;";
+print_r($cars);
+echo "&lt;/pre&gt;";
+                                            </pre>
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="basics-arrays-6-copy-button" onclick="copy('basics-arrays-6-code-snipped', 'basics-arrays-6-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                    </div>
+
+                </div>
+    
+            </div>    
+
+        </section>
+
+        <br>
+
+    </body>
+
+    <script src="components/js/main.js"></script>
+
+</html>

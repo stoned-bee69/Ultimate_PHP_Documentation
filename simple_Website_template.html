@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simple Website Template</title>
+        <link rel="stylesheet" type="text/css" href="components/css/bulma.css"/>
+        <link rel="stylesheet" type="text/css" href="components/css/styles.css"/>  
+        <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
+        <link rel="icon" type="image/png" sizes="196x196" href="https://www.php.net/favicon-196x196.png?v=2">
+
+    </head>
+
+    <body>
+    
+        <section id="navbar">
+
+            <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item">
+                        <img src="components/imges/php.png">
+                    </a>
+
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-start">
+
+                        <a class="navbar-item" href="index.html">
+                            Home
+                        </a>
+
+                        <a class="navbar-item" href="Basics.html">
+                            Basics
+                        </a>
+
+                        <a class="navbar-item" href="Database_PDO.html">
+                            Database_PDO
+                        </a>
+
+                        <a class="navbar-item" href="simple_Website_template.html">
+                            Simple Website Template
+                        </a>
+
+                    </div>
+
+                    <div class="navbar-end">
+                    
+                    </div>
+                </div>
+            </nav>
+
+            <br>
+            <br>
+
+        </section>
+
+        <section id="simple_Website_template">
+
+            <div class="columns">
+
+                <div class="column box is-10 is-offset-1">
+
+                    <div class="content is-medium">
+                        <h1>Simple Website Template</h1>
+
+                        <p>
+                            This is just a simple way to create a website using the Bulma CSS framework. 
+                        </p>
+                        
+                        <a class="navbar-item" href="https://bulma.io">
+                            <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+                        </a>
+
+                        <br>
+
+                        <p>
+                            I'm adding this here so you don't have to worry about the website and can start directly with php.
+                        </p>
+
+                        <br>
+
+                        <hr class="line">
+                        
+                        <h3>
+                            Folder Structure
+                        </h3>
+
+                        <p>
+                            In your new project create the folowing files:
+                        </p>
+
+                        <br>
+
+                        <img src="components/imges/Website_Template_Folder_Structure.png" alt="Website_Template_Folder_Structure.png" style="width: 25%;">
+                
+                        <br>
+                        <br>
+
+                        <p>
+                            This is how i usually do it. Let me explain you why:
+                        </p>
+
+                        <br>
+
+                        <hr class="line">
+
+                        <h3>
+                            components
+                        </h3>
+
+                        <p>
+                            In "components" i store things like CSS, JS or images. <br>
+                            <b>Follow the rule:</b> If you have more than 2 files of one category (for example: css) make a folder and save them there!
+                        </p>
+
+                        <br>
+
+                        <h5>
+                            - script.js
+                        </h5>
+
+                        <p>
+                            Simple JS file for JavaScript.
+                        </p>
+
+                        <br>
+
+                        <h5>
+                            - style.css
+                        </h5>
+
+                        <p>
+                            Simple CSS file for CSS.
+                        </p>
+
+                        <br>
+
+                        <h3>
+                            pages
+                        </h3>
+
+                        <p>
+                            In "pages" i store file i need in more then one page of the website. For example the navbar <br>
+                            <b>Follow the rule:</b> If you need code more often than on one page store it here and include it with php!
+                        </p>
+
+                        <br>
+
+                        <h5>
+                            - navbar.php
+                        </h5>
+
+                        <p>
+                            A simple <a href="https://bulma.io/documentation/components/navbar/">navbar</a> made by Bulma 
+                        </p>
+
+                        <br>
+
+                        <h3>
+                            index.php
+                        </h3>
+
+                        <p>
+                            On this level of folders I store pages that the user can visit like the index.php
+                        </p>
+
+                        <br>
+
+                        <hr class="line">
+
+                        <h3>
+                            Code
+                        </h3>
+
+                        <p>
+                            Here is the code i use one this pages:
+                        </p>
+
+
+                        <h5>
+                            script.js
+                        </h5>
+                        <div class="columns code-snipped">
+                            <div class="column code">
+                                <pre id="simple_Website_template-js-code-snipped">
+// Navbar ---------------------------------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+    
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+    
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+    
+        });
+    });
+    
+});
+// ----------------------------------------------------------------------------------------------------------
+                                </pre>
+                            </div>
+                            <div class="column copy-code-btn">
+                                <button class="button is-dark" id="simple_Website_template-js-copy-button" onclick="copy('simple_Website_template-js-code-snipped', 'simple_Website_template-js-copy-button')">Copy</button>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <h5>
+                            style.css
+                        </h5>
+                        <div class="columns code-snipped">
+                            <div class="column code">
+                                <pre id="simple_Website_template-css-code-snipped">
+:root {
+    background-color: rgb(209, 209, 209);
+}
+
+.pagename {
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-weight: bold;
+}
+                                </pre>
+                            </div>
+                            <div class="column copy-code-btn">
+                                <button class="button is-dark" id="simple_Website_template-css-copy-button" onclick="copy('simple_Website_template-css-code-snipped', 'simple_Website_template-css-copy-button')">Copy</button>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <h5>
+                            navbar.php
+                        </h5>
+                        <div class="columns code-snipped">
+                            <div class="column code">
+                                <pre id="simple_Website_template-navbar-code-snipped">
+&lt;nav class="navbar is-transparent"&gt;
+    &lt;div class="navbar-brand"&gt;
+        &lt;a class="navbar-item" href="https://bulma.io"&gt;
+        &lt;img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"&gt;
+        &lt;/a&gt;
+        &lt;div class="navbar-burger" data-target="navbarExampleTransparentExample"&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;span&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id="navbarExampleTransparentExample" class="navbar-menu"&gt;
+        &lt;div class="navbar-start"&gt;
+
+            &lt;a class="navbar-item" href="/index.php"&gt;
+                Home
+            &lt;/a&gt;
+            
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+                                </pre>
+                            </div>
+                            <div class="column copy-code-btn">
+                                <button class="button is-dark" id="simple_Website_template-navbar-copy-button" onclick="copy('simple_Website_template-navbar-code-snipped', 'simple_Website_template-navbar-copy-button')">Copy</button>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <h5>
+                            index.php
+                        </h5>
+                        <div class="columns code-snipped">
+                            <div class="column code">
+                                <pre id="simple_Website_template-index-code-snipped">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;title&gt;Home&lt;/title&gt;
+        &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"&gt;
+        &lt;link rel="stylesheet" href="/components/style.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;section id="navbar"&gt;
+            &lt;?php 
+                include("./pages/navbar.php");
+            ?&gt;
+        &lt;/section&gt;
+
+        &lt;br&gt;
+        
+        &lt;section id="home"&gt;
+
+            &lt;div class="columns is-centered"&gt;
+                &lt;div class="column is-10"&gt;
+                    &lt;div class="box"&gt;
+
+                        &lt;div class="columns"&gt;
+
+                            &lt;div class="column"&gt;
+                                &lt;h1 class="pagename"&gt;Home&lt;/h1&gt;
+                            &lt;/div&gt;
+
+                        &lt;/div&gt;
+
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+        &lt;/section&gt;
+
+        &lt;script language="javascript" type="text/javascript" src="components/script.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                                </pre>
+                            </div>
+                            <div class="column copy-code-btn">
+                                <button class="button is-dark" id="simple_Website_template-index-copy-button" onclick="copy('simple_Website_template-index-code-snipped', 'simple_Website_template-index-copy-button')">Copy</button>
+                            </div>
+                        </div>
+
+                        <br>
+
+                    </div>
+
+                </div>
+    
+            </div>    
+
+        </section>
+
+        <br>
+
+    </body>
+
+    <script src="components/js/main.js"></script>
+
+</html>

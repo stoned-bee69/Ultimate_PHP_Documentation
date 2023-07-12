@@ -1,0 +1,38 @@
+:root {
+    background-color: #e6e7ef;
+}
+
+.columns {
+    width: 100%;
+}
+
+.code-snipped {
+    border-style: solid;
+    border-radius: 10px;
+    border-color: darkgrey;
+    border-width: 2px;
+
+    background-color: #e7e7ee;
+
+    font-size: medium;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    margin: 5px;
+}
+
+.copy-code-btn {
+    text-align: right;
+}
+
+pre {
+    background-color: transparent;
+    font-size: 15px;
+    white-space:normal;
+}
+
+hr.line {
+    background-color: black;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
