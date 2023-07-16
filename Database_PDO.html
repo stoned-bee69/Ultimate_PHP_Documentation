@@ -804,7 +804,7 @@ function printTable($select_result, $marker = NULL) {
     // Table rows
     foreach ($select_result as $row) {
 
-        if (strtolower($row["brand_name"]) == strtolower($marker)) {
+        if (strtolower($row["Brand_Name"]) == strtolower($marker)) {
             echo '&lt;tr style="color:red"&gt;';
         } else {
             echo '&lt;tr&gt;';
