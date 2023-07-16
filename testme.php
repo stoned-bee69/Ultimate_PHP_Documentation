@@ -191,7 +191,8 @@
         // ----------------------------------------------------------------------------------------------
 
 
-        //Select ----------------------------------------------------------------------------------------        
+        //Insert ----------------------------------------------------------------------------------------   
+
             echo "<h3>Insert: </h3>";
 
             //Call the insert and execute it
@@ -219,16 +220,17 @@
             }
 
             ?>
-            <!-- Just a simple form for you to input a brand -->
-            <form action="./TestMe.php" method="post">
-                <label for="brand_name">New brand name:</label>
-                <input type="text" name="brand_name" id="brand_name">
-                <button type="submit">Insert</button>
-            </form>
+
+                <!-- Just a simple form for you to input a brand -->
+                <form action="./TestMe.php" method="post">
+                    <label for="brand_name">New brand name:</label>
+                    <input type="text" name="brand_name" id="brand_name">
+                    <button name="insert_brand" type="submit">Insert</button>
+                </form>
 
             <?php
 
-            if(isset($_POST["brand_name"])) {
+            if(isset($_POST["insert_brand"])) {
 
                 $msg = insert_brand($_POST["brand_name"]);
 
@@ -236,8 +238,112 @@
 
             }
 
+            $all_brands = Select_all_brands();
 
+            //here i use a function which is explained in "Useful Functions"
+            printTable($all_brands);
+
+            echo "<br>";
             
+        // ----------------------------------------------------------------------------------------------
+
+
+        // Update ---------------------------------------------------------------------------------------
+
+            echo "<h3>Update: </h3>";
+            
+            //Call the update and execute it
+            function update_brand_by_id($new_brand_name, $brand_id) {
+                $update_brand_by_id = "
+                    UPDATE cardb.brand
+                    SET Brand_Name = ? 
+                    WHERE Brand_ID = ?
+                ;";
+
+                $values = array($new_brand_name, $brand_id);
+            
+                if (createStatement($update_brand_by_id, $values)) {
+                    return 'Brand updated!';
+                }
+            
+                return 'Something went wrong while updating a brand!';
+            }
+
+            ?>
+            <!-- Just a simple form for you to update a brand -->
+            <form action="./TestMe.php" method="post">
+                <label for="new_brand_name">New brand name:</label>
+                <input type="text" name="new_brand_name" id="new_brand_name">
+                <br>
+                <label for="brand_id">Brand id you want to change:</label>
+                <input type="text" name="brand_id" id="brand_id">
+                <button name="update_brand" type="submit">Update</button>
+            </form>
+
+            <?php
+
+            if(isset($_POST["update_brand"])) {
+
+                $msg = update_brand_by_id($_POST["new_brand_name"],$_POST["brand_id"]);
+
+                echo "<br>" . $msg . "<br>";
+
+            }
+
+            $all_brands = Select_all_brands();
+
+            //here i use a function which is explained in "Useful Functions"
+            printTable($all_brands);
+
+            echo "<br>";
+
+        // ----------------------------------------------------------------------------------------------
+
+
+        // Delete ---------------------------------------------------------------------------------------
+
+            echo "<h3>Delete: </h3>";
+
+            //Call the delete and execute it
+            function delete_brand_by_id($brand_id) {
+                $delete_brand_by_id = "
+                    DELETE FROM cardb.brand
+                    WHERE Brand_ID = ?
+                ;";
+
+                $values = array($brand_id);
+            
+                if (createStatement($delete_brand_by_id, $values)) {
+                    return 'Brand deleted!';
+                }
+            
+                return 'Something went wrong while deleting a brand!';
+            }
+
+            ?>
+            <!-- Just a simple form for you to update a brand -->
+            <form action="./TestMe.php" method="post">
+                <label for="brand_id">Brand id you want to delete:</label>
+                <input type="text" name="brand_id" id="brand_id">
+                <button name="delete_brand" type="submit">Delete</button>
+            </form>
+
+            <?php
+
+            if(isset($_POST["delete_brand"])) {
+
+                $msg = delete_brand_by_id($_POST["brand_id"]);
+
+                echo "<br>" . $msg . "<br>";
+
+            }
+
+            $all_brands = Select_all_brands();
+
+            //here i use a function which is explained in "Useful Functions"
+            printTable($all_brands);
+
+            echo "<br>";
         // ----------------------------------------------------------------------------------------------
 
 

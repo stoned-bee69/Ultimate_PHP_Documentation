@@ -40,3 +40,9 @@ There is also a folder with components.
 This folder contains css, js and images to display this Website correctly. 
 <br>
 I do not recomend to edit them because otherwise the Documentation will not be displayed correctly.
+
+<br>
+
+<h2><b>Links</b></h2>
+<a href="https://ultimatephpdocumentation.000webhostapp.com/" target="_blank">https://ultimatephpdocumentation.000webhostapp.com/</a><br>
+<a href="https://stoned-bee69.github.io/Ultimate_PHP_Documentation/" target="_blank">https://stoned-bee69.github.io/Ultimate_PHP_Documentation/</a>

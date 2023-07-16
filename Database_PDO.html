@@ -69,8 +69,15 @@
 
                     <div class="content is-medium">
                         <h1>Database PDO</h1>
-                        <p>Here i show you how to connect to a DB and how to execute selects, updates, ... 
-                        <br>Let's start.</p>
+                        <p>
+                            Here i show you how to connect to a DB and how to execute selects, updates, ... 
+                            <br>
+                            It is important to know that I use PDO. 
+                            <br>
+                            I do this because errors are returned very well and you can handle them very easily.
+                            <br>
+                            Let's start.
+                        </p>
                     </div>
     
                     <div class="content is-normal">
@@ -113,7 +120,7 @@
                                         <div class="column code">
                                             <pre class="sql" id="database_pdo-db-1-code-snipped">
 /* Schema CarDB */
-DROP SCHEMA CarDB;
+DROP SCHEMA IF EXISTS CarDB;
 CREATE SCHEMA IF NOT EXISTS CarDB DEFAULT CHARACTER SET utf8 ;
 USE CarDB ;
 
@@ -624,13 +631,27 @@ function insert_brand($new_brand_name) {
                             <div id="database_pdo-update" class="card-content" style="display: none;">
                                 <div class="content">
                                     <p>
-                                        
+                                        In our example we update a brand, here is the code:
                                     </p>
                             
                                     <div class="columns code-snipped">
                                         <div class="column code">
                                             <pre id="database_pdo-update-1-code-snipped">
-   
+function update_brand_by_id($new_brand_name, $brand_id) {
+    $update_brand_by_id = "
+        UPDATE cardb.brand
+        SET Brand_Name = ? 
+        WHERE Brand_ID = ?
+    ;";
+
+    $values = array($new_brand_name, $brand_id);
+
+    if (createStatement($update_brand_by_id, $values)) {
+        return 'Brand updated!';
+    }
+
+    return 'Something went wrong while updating a brand!';
+}
                                             </pre>                                            
                                         </div>
                                         <div class="column copy-code-btn">
@@ -638,6 +659,9 @@ function insert_brand($new_brand_name) {
                                         </div>
                                     </div>
                                     
+                                    <p>
+                                        It is basically the same as in the Update.
+                                    </p>
                                     
                                 </div>
                             </div>
@@ -659,13 +683,27 @@ function insert_brand($new_brand_name) {
                             <div id="database_pdo-delete" class="card-content" style="display: none;">
                                 <div class="content">
                                     <p>
-                                        
+                                        Between the functions for Inser, Update and Delete the only big difference is the names and SQL Queries. <br> 
+                                        For this reason i do not explain the code in more detail here.
                                     </p>
                             
                                     <div class="columns code-snipped">
                                         <div class="column code">
                                             <pre id="database_pdo-delete-1-code-snipped">
-   
+function delete_brand_by_id($brand_id) {
+    $delete_brand_by_id = "
+        DELETE FROM cardb.brand
+        WHERE Brand_ID = ?
+    ;";
+
+    $values = array($brand_id);
+
+    if (createStatement($delete_brand_by_id, $values)) {
+        return 'Brand deleted!';
+    }
+
+    return 'Something went wrong while deleting a brand!';
+}
                                             </pre>                                            
                                         </div>
                                         <div class="column copy-code-btn">
