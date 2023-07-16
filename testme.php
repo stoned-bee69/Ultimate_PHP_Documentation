@@ -349,6 +349,7 @@
 
         // Useful Functions -----------------------------------------------------------------------------
             echo "<h3>Useful Functions: </h3>";
+            echo "printTable():";
 
             //Print a table
             function printTable($select_result) {
@@ -381,6 +382,45 @@
             $all_brands = Select_all_brands();
 
             printTable($all_brands);
+
+            echo "<br>";
+            echo "With marker:";
+
+            function printTablewithMarker($select_result, $marker = NULL) {
+                echo '<table class="table">';
+                echo '<thead><tr>';
+            
+                // Table headers
+                foreach ($select_result[0] as $key => $value) {
+                    echo '<th>' . $key . '</th>';
+                }
+            
+                echo '</tr></thead>';
+                echo '<tbody>';
+            
+                // Table rows
+                foreach ($select_result as $row) {
+            
+                    if (strtolower($row["Brand_Name"]) == strtolower($marker)) {
+                        echo '<tr style="color:red">';
+                    } else {
+                        echo '<tr>';
+                    }
+                    
+                    foreach ($row as $value) {
+                        echo '<td>' . $value . '</td>';
+                    }
+                    
+                    echo '</tr>';
+                }
+                    
+                echo '</tbody>';
+                echo '</table>';
+            }
+
+            $all_brands = Select_all_brands();
+
+            printTablewithMarker($all_brands, "VW");
 
             echo "<br>";
 

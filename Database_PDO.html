@@ -781,6 +781,51 @@ printTable($all_brands);
                                         </div>
                                     </div>
                                     
+                                    <p>
+                                        Quick Tipp:<br>
+                                        If you want to highlight a row when loading the table, you can modify the function as follows:
+                                    </p>
+
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-useful-functions-2-code-snipped">
+function printTable($select_result, $marker = NULL) {
+    echo '&lt;table class="table"&gt;';
+    echo '&lt;thead&gt;&lt;tr&gt;';
+
+    // Table headers
+    foreach ($select_result[0] as $key => $value) {
+        echo '&lt;th&gt;' . $key . '&lt;/th&gt;';
+    }
+
+    echo '&lt;/tr&gt;&lt;/thead&gt;';
+    echo '&lt;tbody&gt;';
+
+    // Table rows
+    foreach ($select_result as $row) {
+
+        if (strtolower($row["brand_name"]) == strtolower($marker)) {
+            echo '&lt;tr style="color:red"&gt;';
+        } else {
+            echo '&lt;tr&gt;';
+        }
+        
+        foreach ($row as $value) {
+            echo '&lt;td&gt;' . $value . '&lt;/td&gt;';
+        }
+        
+        echo '&lt;/tr&gt;';
+    }
+        
+    echo '&lt;/tbody&gt;';
+    echo '&lt;/table&gt;';
+}
+                                            </pre>                                            
+                                        </div>
+                                        <div class="column copy-code-btn">
+                                            <button class="button is-dark" id="database_pdo-useful-functions-2-copy-button" onclick="copy('database_pdo-useful-functions-2-code-snipped', 'database_pdo-useful-functions-2-copy-button')">Copy</button>
+                                        </div>
+                                    </div>
                                     
                                 </div>
                             </div>
