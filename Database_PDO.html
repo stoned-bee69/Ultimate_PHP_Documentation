@@ -743,9 +743,9 @@ function delete_brand_by_id($brand_id) {
                             
                                     <div class="columns code-snipped">
                                         <div class="column code">
-                                            <pre id="database_pdo-useful-functions-1-code-snipped">
+                                            <pre class="database_pdo-useful-functions-1-code-snipped">
 function printTable($select_result) {
-    echo '&lt;table&gt;';
+    echo '&lt;table class="table is-bordered is-narrow is-hoverable"&gt;';
     echo '&lt;thead&gt;&lt;tr&gt;';
     
     // Table headers
@@ -790,7 +790,7 @@ printTable($all_brands);
                                         <div class="column code">
                                             <pre id="database_pdo-useful-functions-2-code-snipped">
 function printTable($select_result, $marker = NULL) {
-    echo '&lt;table class="table"&gt;';
+    echo '&lt;table class="table is-bordered is-narrow is-hoverable"&gt;';
     echo '&lt;thead&gt;&lt;tr&gt;';
 
     // Table headers
