@@ -426,7 +426,7 @@ echo $rows[2]["Brand_Name"];
                                     <h1>WHERE</h1>
 
                                     <p>
-                                        If you want to make a select with a WHERE clause you need to overgive a parameter. <br>
+                                        If you want to make a select with a WHERE clause you need to handover a parameter. <br>
                                         We also need to change our select function slightly: 
                                     </p>
 
@@ -539,7 +539,7 @@ $rows_color_hp = select_car_by_color_and_hp("Silver", 400);
                                     </div>
 
                                     <p>
-                                        You can overgive as many parameter as you want. Just keep the order in mind. <br>
+                                        You can handover as many parameter as you want. Just keep the order in mind. <br>
                                         The first question mark in the select, receives the first value in your $values array.
                                     </p>
 
@@ -738,12 +738,12 @@ function delete_brand_by_id($brand_id) {
                                     <h1>Print a Table</h1>
 
                                     <p>
-                                        Just overgive this function the result array of any select and it will print it out as a table.
+                                        Just handover this function the result array of any select and it will print it out as a table.
                                     </p>
                             
                                     <div class="columns code-snipped">
                                         <div class="column code">
-                                            <pre class="database_pdo-useful-functions-1-code-snipped">
+                                            <pre id="database_pdo-useful-functions-1-code-snipped">
 function printTable($select_result) {
     echo '&lt;table class="table is-bordered is-narrow is-hoverable"&gt;';
     echo '&lt;thead&gt;&lt;tr&gt;';
@@ -826,6 +826,217 @@ function printTable($select_result, $marker = NULL) {
                                             <button class="button is-dark" id="database_pdo-useful-functions-2-copy-button" onclick="copy('database_pdo-useful-functions-2-code-snipped', 'database_pdo-useful-functions-2-copy-button')">Copy</button>
                                         </div>
                                     </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div id="database_pdo-php-exapmle-card" class="card">
+                            <header class="card-header" onclick="hide_show_something('database_pdo-php-exapmle')">
+                                <h3 class="card-header-title">
+                                    PHP Example
+                                </h3>
+                                <button class="card-header-icon" aria-label="more options">
+                                    <span class="icon">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </header>
+                            <div id="database_pdo-php-exapmle" class="card-content" style="display: none;">
+                                <div class="content">
+                                    <p>
+                                        Here is a simple example how to use php with a DB
+                                    </p>
+
+                                    <h1>Select DB and Table then show selected table</h1>
+
+                                    <p>
+                                        Selects you will need:
+                                    </p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-php-exapmle-1-code-snipped">
+function createStatement($query, $arrayValues = NULL) {
+    global $con; 
+    $stmt = $con->prepare($query);
+    $stmt->execute($arrayValues);
+    return $stmt;
+}
+
+function show_databases() {
+    $show_databases = "
+        SHOW DATABASES
+    ;";
+
+    $show_databases = createStatement($show_databases);
+
+    return $show_databases->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function show_tables($dn_name) {
+    $show_tables = "
+        SHOW TABLES FROM " . $dn_name . "
+    ;";
+
+    $show_tables = createStatement($show_tables);
+
+    return $show_tables->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function select($db_name, $table_name) {
+    $select = "
+        SELECT * FROM " . $db_name . "." . $table_name . "
+    ;";
+
+    $select = createStatement($select);
+
+    return $select->fetchAll(PDO::FETCH_ASSOC);
+}
+                                            </pre>                                            
+                                        </div>
+                                    </div>
+                                    
+                                        
+                                    <div class="column copy-code-btn">
+                                        <button class="button is-dark" id="database_pdo-php-exapmle-1-copy-button" onclick="copy('database_pdo-php-exapmle-1-code-snipped', 'database_pdo-php-exapmle-1-copy-button')">Copy</button>
+                                    </div>
+
+                                    <p>
+                                        Code:
+                                    </p>
+                            
+                                    <div class="columns code-snipped">
+                                        <div class="column code">
+                                            <pre id="database_pdo-php-exapmle-2-code-snipped">
+&lt;section id="select"&gt;
+
+&lt;div class="columns is-centered"&gt;
+    &lt;div class="column is-10"&gt;
+        &lt;div class="box"&gt;
+
+            &lt;div class="columns"&gt;
+
+                &lt;div class="column"&gt;
+                    &lt;h1 class="pagename"&gt;Select&lt;/h1&gt;
+                    
+                    &lt;form class="form" action="/table.php" method="post"&gt;
+
+                        &lt;?php
+
+                            //Part 1 - Select DB
+                                $databases = show_databases();
+
+                                ?&gt;
+
+                                &lt;div class="field"&gt;
+                                    &lt;label class="label"&gt;Database&lt;/label&gt;
+                                    &lt;div class="select"&gt;
+                                        &lt;select name="dbname"&gt;
+                                            &lt;?php
+
+                                                foreach($databases as $database) {
+
+                                                    if($_POST["dbname"] == $database["Database"]) {
+                                                        echo '&lt;option value="' . $database["Database"] . '" selected&gt;' . $database["Database"] . '&lt;/option&gt;';
+                                                    } else {
+                                                        echo '&lt;option value="' . $database["Database"] . '"&gt;' . $database["Database"] . '&lt;/option&gt;';
+                                                    }
+
+                                                }
+
+                                            ?&gt;
+                                        &lt;/select&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+
+                                &lt;?php
+                            //
+                            //Part 2 - Select Table                                    
+                                if(isset($_POST["dbname"])) {
+
+                                    $tables = show_tables($_POST["dbname"]);
+                                    
+                                    ?&gt;
+
+                                    &lt;div class="field"&gt;
+                                        &lt;label class="label"&gt;Table&lt;/label&gt;
+                                        &lt;div class="select"&gt;
+                                            &lt;select name="tablename"&gt;
+                                                &lt;?php
+
+                                                    foreach($tables as $table) {
+                                                        
+                                                        if($_POST["tablename"] == $table["Tables_in_" . $_POST["dbname"]]) {
+                                                            echo '&lt;option value="' . $table["Tables_in_" . $_POST["dbname"]] . '" selected&gt;' . $table["Tables_in_" . $_POST["dbname"]] . '&lt;/option&gt;';
+                                                        } else {
+                                                            echo '&lt;option value="' . $table["Tables_in_" . $_POST["dbname"]] . '"&gt;' . $table["Tables_in_" . $_POST["dbname"]] . '&lt;/option&gt;';
+                                                        }                                                               
+                                                
+                                                    }
+
+                                                ?&gt;
+                                            &lt;/select&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+
+                                    &lt;?php
+
+                                }
+                            //
+                            //Part 3 - Show Table
+                                if(isset($_POST["tablename"])) {
+                                    
+                                    ?&gt;
+
+                                    &lt;div class="field"&gt;
+                                        &lt;label class="label"&gt;Data&lt;/label&gt;
+
+                                        &lt;?php
+
+                                            $result = select($_POST["dbname"], $_POST["tablename"]);
+
+                                            printTable($result);
+
+                                        ?&gt;
+                                        
+                                    &lt;/div&gt;
+
+                                    &lt;?php
+
+                                }
+                            //
+                        ?&gt;
+
+                        &lt;div class="field"&gt;
+                            &lt;div class="control"&gt;
+                                &lt;button class="button is-primary is-outlined"&gt;Submit&lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+                    &lt;/form&gt;
+
+                &lt;/div&gt;
+
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+                                            </pre>                                            
+                                        </div>
+                                    </div>
+                                    <div class="column copy-code-btn">
+                                        <button class="button is-dark" id="database_pdo-php-exapmle-2-copy-button" onclick="copy('database_pdo-php-exapmle-2-code-snipped', 'database_pdo-php-exapmle-2-copy-button')">Copy</button>
+                                    </div>
+
+                                    <p>
+                                        I also use the printTable funtion from the Useful Functions part.
+                                    </p>
                                     
                                 </div>
                             </div>
